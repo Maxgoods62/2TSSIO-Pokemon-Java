@@ -14,9 +14,11 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -24,6 +26,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.Pokemon;
+import model.PokemonFeu;
+import model.PokemonInsecte;
+import model.PokemonMer;
 
 import javax.swing.ListSelectionModel;
 
@@ -131,7 +136,7 @@ public class Fprinicpale extends JFrame {
 		txtnbNageoire.setColumns(10);
 		
 		JLabel lblNombresNageoires = new JLabel("Nombres Nageoires :");
-		lblNombresNageoires.setBounds(146, 145, 116, 14);
+		lblNombresNageoires.setBounds(146, 145, 138, 14);
 		contentPane.add(lblNombresNageoires);
 		
 		txtVitesseEau = new JTextField();
@@ -163,9 +168,9 @@ public class Fprinicpale extends JFrame {
 		contentPane.add(txtNbBouledeFeu);
 		txtNbBouledeFeu.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Nb Boule de Feu :");
-		lblNewLabel.setBounds(294, 89, 100, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblNbBoulesDeFeu = new JLabel("Nb Boule de Feu :");
+		lblNbBoulesDeFeu.setBounds(294, 89, 100, 14);
+		contentPane.add(lblNbBoulesDeFeu);
 		
 		txtNbAiles = new JTextField();
 		txtNbAiles.setEnabled(false);
@@ -174,7 +179,7 @@ public class Fprinicpale extends JFrame {
 		txtNbAiles.setColumns(10);
 		
 		JLabel lblNbAiles = new JLabel("Nb Ailes :");
-		lblNbAiles.setBounds(294, 201, 46, 14);
+		lblNbAiles.setBounds(294, 201, 100, 14);
 		contentPane.add(lblNbAiles);
 		
 		txtPuissanceFeu = new JTextField();
@@ -217,11 +222,54 @@ public class Fprinicpale extends JFrame {
 		contentPane.add(txtVitesseSol);
 		txtVitesseSol.setColumns(10);
 		
+		List<List> listGroupGeneral = new ArrayList<List>();
+		
+		List<JComponent> listGroupEau = new ArrayList<JComponent>();
+		List<JComponent> listGroupFeu = new ArrayList<JComponent>();
+		List<JComponent> listGroupInsecte = new ArrayList<JComponent>();
+		
+		listGroupEau.add(txtnbNageoire);
+		listGroupEau.add(txtVitesseEau);
+		listGroupEau.add(lblNombresNageoires);
+		listGroupEau.add(lblVitesseEau);
+		
+		listGroupFeu.add(txtTaille);
+		listGroupFeu.add(lblTaille);
+		listGroupFeu.add(lblNbAiles);
+		listGroupFeu.add(lblNbAiles);
+		listGroupFeu.add(lblNbBoulesDeFeu);
+		listGroupFeu.add(txtNbBouledeFeu);
+		listGroupFeu.add(txtPuissanceFeu);
+		listGroupFeu.add(lblPuissanceFeu);
+		
+		listGroupInsecte.add(txtTaille);
+		listGroupInsecte.add(txtNbAiles);
+		listGroupInsecte.add(txtNbPattes);
+		listGroupInsecte.add(txtVitesseVol);
+		listGroupInsecte.add(txtVitesseSol);
+		listGroupInsecte.add(lblTaille);
+		listGroupInsecte.add(lblNbAiles);
+		listGroupInsecte.add(lblNbPattes);
+		listGroupInsecte.add(lblVitesseVol);
+		listGroupInsecte.add(lblVitesseSol);
+		
+		listGroupGeneral.add(listGroupEau);
+		listGroupGeneral.add(listGroupFeu);
+		listGroupGeneral.add(listGroupInsecte);
+		
+		for(List<JComponent> pListe : listGroupGeneral){
+			for(JComponent pGroup : pListe){
+				pGroup.setVisible(false);
+				pGroup.setEnabled(false);
+			}
+		}
+		
+		
 		JButton btnLister = new JButton("Lister");
 		btnLister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				FListePokemon frameListePokemon = new FListePokemon();
+				FListePokemon frameListePokemon = new FListePokemon(arrayListePokemon);
 				frameListePokemon.setVisible(true);
 			}
 		});
@@ -230,25 +278,40 @@ public class Fprinicpale extends JFrame {
 		
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				float pPoids = Float.parseFloat(txtPoids.getText());
-				float pEnergie = Float.parseFloat(txtEnergie.getText());
+				
 				String pNom = txtNom.getText();
-				String pPokemonType = (String) comboBoxTypePoke.getSelectedItem();
+				String pPokemonType = (String)comboBoxTypePoke.getSelectedItem();	
 				
+				double pPoids = ParseDouble(txtPoids.getText());
+				double pEnergie = ParseDouble(txtEnergie.getText());
+				double pTaille = ParseDouble(txtTaille.getText());
+				double pVitesseVol = ParseDouble(txtVitesseVol.getText());
+				double pVitesseSol = ParseDouble(txtVitesseSol.getText());
+				double pVitesseEau = ParseDouble(txtVitesseEau.getText());
+				double pPuissanceFeu = ParseDouble(txtPuissanceFeu.getText());
+				
+				int pNbAiles = ParseInt(txtNbAiles.getText());
+				int pNbPattes = ParseInt(txtNbPattes.getText());
+				int pNbNageoire = ParseInt(txtnbNageoire.getText());
+				int pNbBouledeFeu = ParseInt(txtNbBouledeFeu.getText());
+				
+
 				Pokemon pPokemon = null;
-				
-				if (pPokemonType.equals("Pokemon")) {
-					 pPokemon = new Pokemon(pNom, pEnergie, pPoids);
-					System.out.println(pPokemon.toString());
-				} else if (pPokemonType.equals("Eau")) {
-					System.out.println(pPokemonType);
-				} else if (pPokemonType.equals("Feu")) {
-					
-				} else if (pPokemonType.equals("Insecte")) {
-					
+				if (pNom != "" & pPokemonType != "" & pPoids != -2.0 & pEnergie != -2.0) {
+					if (pPokemonType == "Pokemon") {
+						 pPokemon = new Pokemon(pNom, pEnergie, pPoids);
+						 System.out.println(pPokemonType);
+					} else if (pPokemonType.equals("Eau")) {
+						 pPokemon = new PokemonMer(pNom, pEnergie, pPoids, pNbNageoire, pVitesseEau);
+					} else if (pPokemonType.equals("Feu")) {
+						 pPokemon = new PokemonFeu(pNom, pEnergie, pPoids, pNbAiles, pTaille, pNbBouledeFeu, pPuissanceFeu);
+					} else if (pPokemonType.equals("Insecte")) {
+						 pPokemon = new PokemonInsecte(pNom, pEnergie, pPoids, pNbAiles, pNbPattes, pTaille, pVitesseVol, pVitesseSol);
+					} 
+					arrayListePokemon.add(pPokemon);
 				}
-				arrayListePokemon.add(pPokemon);
 				
+			
 			}
 			
 		});
@@ -258,48 +321,85 @@ public class Fprinicpale extends JFrame {
 				String pPokemon = (String) comboBoxTypePoke.getSelectedItem();
 				
 				if (pPokemon.equals("Pokemon")) {
-					txtnbNageoire.setEnabled(false);
-					txtVitesseEau.setEnabled(false);
-					txtTaille.setEnabled(false);
-					txtNbAiles.setEnabled(false);
-					txtNbBouledeFeu.setEnabled(false);
-					txtPuissanceFeu.setEnabled(false);
-					txtNbPattes.setEnabled(false);
-					txtVitesseVol.setEnabled(false);
-					txtVitesseSol.setEnabled(false);
+					for(List<JComponent> pListe : listGroupGeneral){
+						for(JComponent pGroup : pListe){
+							pGroup.setVisible(false);
+							pGroup.setEnabled(false);
+						}
+					}
+					
 				} else if (pPokemon.equals("Eau")) {
-					txtnbNageoire.setEnabled(true);
-					txtVitesseEau.setEnabled(true);
-					txtTaille.setEnabled(false);
-					txtNbAiles.setEnabled(false);
-					txtNbBouledeFeu.setEnabled(false);
-					txtPuissanceFeu.setEnabled(false);
-					txtNbPattes.setEnabled(false);
-					txtVitesseVol.setEnabled(false);
-					txtVitesseSol.setEnabled(false);
+					
+					for(JComponent c : listGroupFeu){
+					    c.setVisible(false);
+					    c.setEnabled(false);
+					}
+					for(JComponent c : listGroupEau){
+					    c.setVisible(true);
+					    c.setEnabled(true);
+					}
+					for(JComponent c : listGroupInsecte){
+					    c.setVisible(false);
+					    c.setEnabled(false);
+					}
+					
 				} else if (pPokemon.equals("Feu")) {
-					txtnbNageoire.setEnabled(false);
-					txtVitesseEau.setEnabled(false);
-					txtTaille.setEnabled(true);
-					txtNbAiles.setEnabled(true);
-					txtNbBouledeFeu.setEnabled(true);
-					txtPuissanceFeu.setEnabled(true);
-					txtNbPattes.setEnabled(false);
-					txtVitesseVol.setEnabled(false);
-					txtVitesseSol.setEnabled(false);
+					for(JComponent c : listGroupFeu){
+					    c.setVisible(true);
+					    c.setEnabled(true);
+					}
+					for(JComponent c : listGroupEau){
+					    c.setVisible(false);
+					    c.setEnabled(false);
+					}
+					for(JComponent c : listGroupInsecte){
+					    c.setVisible(false);
+					    c.setEnabled(false);
+					}
+					
 				} else if (pPokemon.equals("Insecte")) {
-					txtnbNageoire.setEnabled(false);
-					txtVitesseEau.setEnabled(false);
-					txtTaille.setEnabled(true);
-					txtNbAiles.setEnabled(true);
-					txtNbBouledeFeu.setEnabled(false);
-					txtPuissanceFeu.setEnabled(false);
-					txtNbPattes.setEnabled(true);
-					txtVitesseVol.setEnabled(true);
-					txtVitesseSol.setEnabled(true);
+					for(JComponent c : listGroupFeu){
+					    c.setVisible(false);
+					    c.setEnabled(false);
+					}
+					for(JComponent c : listGroupEau){
+					    c.setVisible(false);
+					    c.setEnabled(false);
+					}
+					for(JComponent c : listGroupInsecte){
+					    c.setVisible(true);
+					    c.setEnabled(true);
+					}
 				}
 			}
 		});
 		
+	
+	}
+	
+	double ParseDouble(String strNumber) {
+		   if (strNumber != null && strNumber.length() > 0) {
+		       try {
+		          return Double.parseDouble(strNumber);
+		       } catch(Exception e) {
+		          return -1.0;   
+		       }
+		   }
+		   else {
+			   return -2.0;
+		   }
+	}
+	
+	int ParseInt(String strNumber) {
+		   if (strNumber != null && strNumber.length() > 0) {
+		       try {
+		          return Integer.parseInt(strNumber);
+		       } catch(Exception e) {
+		          return -1;  
+		       }
+		   }
+		   else {
+			   return -2;
+		   }
 	}
 }

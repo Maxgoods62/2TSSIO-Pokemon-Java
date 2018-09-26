@@ -4,9 +4,9 @@ public class PokemonInsecte extends Pokemon {
 	
 	private int nbAiles;
 	private int nbPattes;
-	private float taille;
-	private float vitesseVol;
-	private float vitesseSol;
+	private double taille;
+	private double vitesseVol;
+	private double vitesseSol;
 	
 	public int getNbAiles() {
 		return nbAiles;
@@ -14,13 +14,13 @@ public class PokemonInsecte extends Pokemon {
 	public int getNbPattes() {
 		return nbPattes;
 	}
-	public float getTaille() {
+	public double getTaille() {
 		return taille;
 	}
-	public float getVitesseVol() {
+	public double getVitesseVol() {
 		return vitesseVol;
 	}
-	public float getVitesseSol() {
+	public double getVitesseSol() {
 		return vitesseSol;
 	}
 	public void setNbAiles(int nbAiles) {
@@ -29,13 +29,13 @@ public class PokemonInsecte extends Pokemon {
 	public void setNbPattes(int nbPattes) {
 		this.nbPattes = nbPattes;
 	}
-	public void setTaille(float taille) {
+	public void setTaille(double taille) {
 		this.taille = taille;
 	}
-	public void setVitesseVol(float vitesseVol) {
+	public void setVitesseVol(double vitesseVol) {
 		this.vitesseVol = vitesseVol;
 	}
-	public void setVitesseSol(float vitesseSol) {
+	public void setVitesseSol(double vitesseSol) {
 		this.vitesseSol = vitesseSol;
 	}
 	
@@ -50,8 +50,8 @@ public class PokemonInsecte extends Pokemon {
 	
 	
 	
-	public PokemonInsecte(String pNom, float pEnergie, float pPoids, int nbAiles, int nbPattes, float taille,
-			float vitesseVol, float vitesseSol) {
+	public PokemonInsecte(String pNom, double pEnergie, double pPoids, int nbAiles, int nbPattes, double taille,
+			double vitesseVol, double vitesseSol) {
 		super(pNom, pEnergie, pPoids);
 		this.nbAiles = nbAiles;
 		this.nbPattes = nbPattes;
@@ -70,7 +70,7 @@ public class PokemonInsecte extends Pokemon {
 	
 	public void attaque(Pokemon pPokemonAttaque) {
 		
-		float attaque = 3*this.vitesseVol;
+		double attaque = 3*this.vitesseVol;
 		
 		super.attaque(pPokemonAttaque, this, attaque);
 		

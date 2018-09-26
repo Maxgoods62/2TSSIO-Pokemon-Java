@@ -5,8 +5,8 @@ import controller.AttaqueGestion;
 public class Pokemon {
 	
 	protected String nom;
-	protected float energie;
-	protected float poids;
+	protected double energie;
+	protected double poids;
 	protected Dresseur monDresseur;
 	
 
@@ -16,20 +16,20 @@ public class Pokemon {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public float getEnergie() {
+	public double getEnergie() {
 		return energie;
 	}
-	public void setEnergie(float energie) {
+	public void setEnergie(double energie) {
 		this.energie = energie;
 	}
-	public float getPoids() {
+	public double getPoids() {
 		return poids;
 	}
 	public void setPoids(float poids) {
 		this.poids = poids;
 	}
 	
-	public Pokemon(String pNom, float pEnergie, float pPoids) {
+	public Pokemon(String pNom, double pEnergie, double pPoids) {
 		this.nom = pNom;
 		this.energie = pEnergie;
 		this.poids = pPoids;
@@ -40,7 +40,7 @@ public class Pokemon {
 	}
 	
 	
-	public void attaque(Pokemon pPokemon1, Pokemon pPokemon2, float attaque) {
+	public void attaque(Pokemon pPokemon1, Pokemon pPokemon2, double attaque) {
 		AttaqueGestion.GestionAttaque(pPokemon1, pPokemon2, attaque);
 	}
 	

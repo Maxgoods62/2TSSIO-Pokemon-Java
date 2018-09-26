@@ -3,9 +3,9 @@ package model;
 public class PokemonMer extends Pokemon {
 
 	private int nbNageoire;
-	private float vitesseEau;
+	private double vitesseEau;
 	
-	public PokemonMer(String pNom, float pEnergie, float pPoids, int nbNageoire, float vitesseEau) {
+	public PokemonMer(String pNom, double pEnergie, double pPoids, int nbNageoire, double vitesseEau) {
 		super(pNom, pEnergie, pPoids);
 		this.nbNageoire = nbNageoire;
 		this.vitesseEau = vitesseEau;
@@ -18,10 +18,10 @@ public class PokemonMer extends Pokemon {
 		this.nbNageoire = nbNageoire;
 	}
 	
-	public float getVitesseEau() {
+	public double getVitesseEau() {
 		return vitesseEau;
 	}
-	public void setVitesseEau(float vitesseEau) {
+	public void setVitesseEau(double vitesseEau) {
 		this.vitesseEau = vitesseEau;
 	}
 
@@ -37,7 +37,7 @@ public class PokemonMer extends Pokemon {
 	
 	public void attaque(Pokemon pPokemonAttaque) {
 		
-		float attaque = 10*this.nbNageoire;
+		double attaque = 10*this.nbNageoire;
 		super.attaque(pPokemonAttaque, this, attaque);
 		
 	}
