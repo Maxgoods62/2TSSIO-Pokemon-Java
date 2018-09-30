@@ -42,7 +42,7 @@ public class FListePokemon extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FListePokemon(ArrayList<Pokemon> arrayListePokemon) {
+	public FListePokemon(DefaultListModel ListePokemon) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,9 +50,7 @@ public class FListePokemon extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		DefaultListModel model = new DefaultListModel();
-		JList list = new JList(model);
-		
+		JList list = new JList(ListePokemon);
 		
 		list.addContainerListener(new ContainerAdapter() {
 			@Override
@@ -62,10 +60,12 @@ public class FListePokemon extends JFrame {
 		list.setBounds(10, 11, 403, 130);
 		contentPane.add(list);
 		
+		/*
 		for(Pokemon pPokemon : arrayListePokemon) {
 			model.addElement(pPokemon);
 			System.out.println(pPokemon.toString());
 		}
+		*/
 		
 		
 		JButton btnQuitter = new JButton("Quitter");

@@ -51,6 +51,8 @@ public class Fprinicpale extends JFrame {
 	private JTextField txtVitesseVol;
 	private JTextField txtVitesseSol;
 	public ArrayList<Pokemon> arrayListePokemon = new ArrayList<Pokemon>();
+	public DefaultListModel model = new DefaultListModel();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -118,19 +120,7 @@ public class Fprinicpale extends JFrame {
 		txtPoids.setBounds(294, 58, 100, 20);
 		contentPane.add(txtPoids);
 		txtPoids.setColumns(10);
-		
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtPoids.setText("");
-				txtEnergie.setText("");
-				txtNom.setText("");
-				
-				comboBoxTypePoke.setSelectedIndex(-1);
-			}
-		});
-		btnAnnuler.setBounds(203, 225, 89, 23);
-		contentPane.add(btnAnnuler);
+	
 		
 		txtnbNageoire = new JTextField();
 		txtnbNageoire.setEnabled(false);
@@ -272,7 +262,7 @@ public class Fprinicpale extends JFrame {
 		btnLister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				FListePokemon frameListePokemon = new FListePokemon(arrayListePokemon);
+				FListePokemon frameListePokemon = new FListePokemon(model);
 				frameListePokemon.setVisible(true);
 			}
 		});
@@ -291,15 +281,32 @@ public class Fprinicpale extends JFrame {
 		btnModifier.setBounds(21, 359, 89, 23);
 		contentPane.add(btnModifier);
 		
-		DefaultListModel model = new DefaultListModel();
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtPoids.setText("");
+				txtEnergie.setText("");
+				txtNom.setText("");
+				txtTaille.setText("");
+				txtVitesseVol.setText("");
+				txtVitesseSol.setText("");
+				txtVitesseEau.setText("");
+				txtPuissanceFeu.setText("");
+				txtNbAiles.setText("");
+				txtNbPattes.setText("");
+				txtnbNageoire.setText("");
+				txtNbBouledeFeu.setText("");
+				
+				comboBoxTypePoke.setSelectedIndex(0);
+			}
+		});
+		btnAnnuler.setBounds(270, 228, 89, 23);
+		contentPane.add(btnAnnuler);
+		
 		
 		JList list = new JList(model);
 		list.setBounds(146, 262, 350, 238);
 		contentPane.add(list);
-		
-		JButton btnLister_1 = new JButton("Lister");
-		btnLister_1.setBounds(346, 225, 89, 23);
-		contentPane.add(btnLister_1);
 		
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -333,7 +340,7 @@ public class Fprinicpale extends JFrame {
 					} else if (pPokemonType.equals("Insecte")) {
 						 pPokemon = new PokemonInsecte(pNom, pEnergie, pPoids, pNbAiles, pNbPattes, pTaille, pVitesseVol, pVitesseSol);
 					} 
-					arrayListePokemon.add(pPokemon);
+					//arrayListePokemon.add(pPokemon);
 					model.addElement(pPokemon);
 				}
 				
