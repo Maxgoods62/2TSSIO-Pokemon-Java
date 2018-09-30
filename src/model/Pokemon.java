@@ -9,7 +9,6 @@ public class Pokemon {
 	protected double poids;
 	protected Dresseur monDresseur;
 	
-
 	public String getNom() {
 		return nom;
 	}

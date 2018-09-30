@@ -59,9 +59,8 @@ public class FListePokemon extends JFrame {
 			public void componentAdded(ContainerEvent arg0) {
 			}
 		});
-		list.setBounds(156, 11, 257, 130);
+		list.setBounds(10, 11, 403, 130);
 		contentPane.add(list);
-		
 		
 		for(Pokemon pPokemon : arrayListePokemon) {
 			model.addElement(pPokemon);

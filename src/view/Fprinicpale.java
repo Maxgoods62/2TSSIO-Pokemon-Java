@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ import model.PokemonInsecte;
 import model.PokemonMer;
 
 import javax.swing.ListSelectionModel;
+import javax.swing.JList;
 
 public class Fprinicpale extends JFrame {
 
@@ -70,14 +73,14 @@ public class Fprinicpale extends JFrame {
 	public Fprinicpale() {
 		setTitle("Cr\u00E9ation de PokePoke");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 450);
+		setBounds(100, 100, 700, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setBounds(127, 377, 89, 23);
+		btnAjouter.setBounds(21, 291, 89, 23);
 		contentPane.add(btnAjouter);
 		
 		txtNom = new JTextField();
@@ -126,7 +129,7 @@ public class Fprinicpale extends JFrame {
 				comboBoxTypePoke.setSelectedIndex(-1);
 			}
 		});
-		btnAnnuler.setBounds(21, 377, 89, 23);
+		btnAnnuler.setBounds(203, 225, 89, 23);
 		contentPane.add(btnAnnuler);
 		
 		txtnbNageoire = new JTextField();
@@ -151,14 +154,14 @@ public class Fprinicpale extends JFrame {
 		
 		txtTaille = new JTextField();
 		txtTaille.setEnabled(false);
-		txtTaille.setBounds(146, 226, 100, 20);
+		txtTaille.setBounds(10, 114, 100, 20);
 		contentPane.add(txtTaille);
 		txtTaille.setColumns(10);
 		
 		JLabel lblTaille = new JLabel("Taille :");
 		lblTaille.setVerticalAlignment(SwingConstants.TOP);
 		lblTaille.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTaille.setBounds(146, 201, 100, 14);
+		lblTaille.setBounds(10, 89, 100, 14);
 		contentPane.add(lblTaille);
 		
 		txtNbBouledeFeu = new JTextField();
@@ -174,12 +177,12 @@ public class Fprinicpale extends JFrame {
 		
 		txtNbAiles = new JTextField();
 		txtNbAiles.setEnabled(false);
-		txtNbAiles.setBounds(294, 226, 100, 20);
+		txtNbAiles.setBounds(10, 170, 100, 20);
 		contentPane.add(txtNbAiles);
 		txtNbAiles.setColumns(10);
 		
 		JLabel lblNbAiles = new JLabel("Nb Ailes :");
-		lblNbAiles.setBounds(294, 201, 100, 14);
+		lblNbAiles.setBounds(10, 145, 100, 14);
 		contentPane.add(lblNbAiles);
 		
 		txtPuissanceFeu = new JTextField();
@@ -213,12 +216,12 @@ public class Fprinicpale extends JFrame {
 		txtVitesseVol.setColumns(10);
 		
 		JLabel lblVitesseSol = new JLabel("Vitesse Sol :");
-		lblVitesseSol.setBounds(427, 201, 100, 14);
+		lblVitesseSol.setBounds(554, 89, 100, 14);
 		contentPane.add(lblVitesseSol);
 		
 		txtVitesseSol = new JTextField();
 		txtVitesseSol.setEnabled(false);
-		txtVitesseSol.setBounds(427, 226, 100, 20);
+		txtVitesseSol.setBounds(554, 114, 100, 20);
 		contentPane.add(txtVitesseSol);
 		txtVitesseSol.setColumns(10);
 		
@@ -236,7 +239,7 @@ public class Fprinicpale extends JFrame {
 		listGroupFeu.add(txtTaille);
 		listGroupFeu.add(lblTaille);
 		listGroupFeu.add(lblNbAiles);
-		listGroupFeu.add(lblNbAiles);
+		listGroupFeu.add(txtNbAiles);
 		listGroupFeu.add(lblNbBoulesDeFeu);
 		listGroupFeu.add(txtNbBouledeFeu);
 		listGroupFeu.add(txtPuissanceFeu);
@@ -265,7 +268,7 @@ public class Fprinicpale extends JFrame {
 		}
 		
 		
-		JButton btnLister = new JButton("Lister");
+		JButton btnLister = new JButton("Lister (autre fenetre)");
 		btnLister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -273,8 +276,30 @@ public class Fprinicpale extends JFrame {
 				frameListePokemon.setVisible(true);
 			}
 		});
-		btnLister.setBounds(427, 377, 89, 23);
+		btnLister.setBounds(520, 403, 134, 23);
 		contentPane.add(btnLister);
+		
+		JButton btnQuitter = new JButton("Quitter");
+		btnQuitter.setBounds(520, 477, 134, 23);
+		contentPane.add(btnQuitter);
+		
+		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.setBounds(21, 424, 89, 23);
+		contentPane.add(btnSupprimer);
+		
+		JButton btnModifier = new JButton("Modifier");
+		btnModifier.setBounds(21, 359, 89, 23);
+		contentPane.add(btnModifier);
+		
+		DefaultListModel model = new DefaultListModel();
+		
+		JList list = new JList(model);
+		list.setBounds(146, 262, 350, 238);
+		contentPane.add(list);
+		
+		JButton btnLister_1 = new JButton("Lister");
+		btnLister_1.setBounds(346, 225, 89, 23);
+		contentPane.add(btnLister_1);
 		
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -309,6 +334,7 @@ public class Fprinicpale extends JFrame {
 						 pPokemon = new PokemonInsecte(pNom, pEnergie, pPoids, pNbAiles, pNbPattes, pTaille, pVitesseVol, pVitesseSol);
 					} 
 					arrayListePokemon.add(pPokemon);
+					model.addElement(pPokemon);
 				}
 				
 			
@@ -334,20 +360,16 @@ public class Fprinicpale extends JFrame {
 					    c.setVisible(false);
 					    c.setEnabled(false);
 					}
-					for(JComponent c : listGroupEau){
-					    c.setVisible(true);
-					    c.setEnabled(true);
-					}
 					for(JComponent c : listGroupInsecte){
 					    c.setVisible(false);
 					    c.setEnabled(false);
+					}
+					for(JComponent c : listGroupEau){
+					    c.setVisible(true);
+					    c.setEnabled(true);
 					}
 					
 				} else if (pPokemon.equals("Feu")) {
-					for(JComponent c : listGroupFeu){
-					    c.setVisible(true);
-					    c.setEnabled(true);
-					}
 					for(JComponent c : listGroupEau){
 					    c.setVisible(false);
 					    c.setEnabled(false);
@@ -355,6 +377,10 @@ public class Fprinicpale extends JFrame {
 					for(JComponent c : listGroupInsecte){
 					    c.setVisible(false);
 					    c.setEnabled(false);
+					}
+					for(JComponent c : listGroupFeu){
+					    c.setVisible(true);
+					    c.setEnabled(true);
 					}
 					
 				} else if (pPokemon.equals("Insecte")) {
